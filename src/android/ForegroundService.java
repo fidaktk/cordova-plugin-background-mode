@@ -25,6 +25,7 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.NotificationChannel;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
@@ -37,8 +38,8 @@ import android.os.PowerManager;
 import android.app.NotificationChannel;
 
 import org.json.JSONObject;
-
 import static android.os.PowerManager.PARTIAL_WAKE_LOCK;
+import android.graphics.Color;
 
 /**
  * Puts the service in a foreground state, where the system considers it to be
