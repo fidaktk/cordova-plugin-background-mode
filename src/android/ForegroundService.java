@@ -130,10 +130,16 @@ public class ForegroundService extends Service {
         boolean isSilent    = settings.optBoolean("silent", false);
 
         if (!isSilent) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                startForeground(NOTIFICATION_ID, makeNotification(), ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC);
-            } else {
-                startForeground(NOTIFICATION_ID, makeNotification());
+            try {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    startForeground(NOTIFICATION_ID, makeNotification(), ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK);
+                } else {
+                    startForeground(NOTIFICATION_ID, makeNotification());
+                }
+            } catch (Exception e) {
+                // Gracefully handle ForegroundServiceStartNotAllowedException on Android 14+
+                // This can happen if the dataSync time limit was exhausted in a previous session
+                Log.e("BackgroundMode", "Failed to start foreground service: " + e.getMessage());
             }
         }
 
