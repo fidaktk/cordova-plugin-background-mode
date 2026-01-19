@@ -37,6 +37,8 @@ import android.os.IBinder;
 import android.os.PowerManager;
 import android.app.NotificationChannel;
 
+import android.view.WindowManager;
+import android.util.Log;
 import org.json.JSONObject;
 
 import static android.os.PowerManager.PARTIAL_WAKE_LOCK;
